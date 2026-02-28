@@ -1,17 +1,24 @@
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar/navbar";
+import MainLayout from "./layouts/MainLayouts";
+
 import Home from "./views/Home";
-import Footer from "./components/Footer/footer";
+import Login from "./components/Auth/signin";
+import Register from "./components/Auth/signup";
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <Routes>
+    <Routes>
+
+      {/* Layout with Navbar + Footer */}
+      <Route element={<MainLayout />}>
         <Route path="/" element={<Home />} />
-      </Routes>
-      <Footer />
-    </>
+      </Route>
+
+      {/* Auth Pages (No Navbar & Footer) */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+
+    </Routes>
   );
 }
 
