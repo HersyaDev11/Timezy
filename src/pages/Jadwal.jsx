@@ -8,10 +8,12 @@ import TodaySchedule from "../components/jadwal/TodaySchedule";
 import UpcomingDeadlines from "../components/jadwal/UpcomingDeadlines";
 import ScheduleModal from "../components/jadwal/ScheduleModal";
 import { useSchedule } from "../context/ScheduleContext";
+import { useScheduleNotifications } from "../hooks/useScheduleNotifications";
 
 export default function Jadwal() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { searchQuery, setSearchQuery, currentView, notification } = useSchedule();
+    const { isSupported, permission, requestPermission } = useScheduleNotifications();
 
     useEffect(() => {
         const handleOpenModal = () => setIsModalOpen(true);
@@ -46,11 +48,20 @@ export default function Jadwal() {
                             Minggu 1 - Semester Genap
                         </p>
                     </div>
-                    <button className="w-10 h-10 flex items-center justify-center rounded-xl bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-all relative shadow-sm cursor-pointer">
+                    <button
+                        onClick={requestPermission}
+                        className={`w-10 h-10 flex items-center justify-center rounded-xl bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-800 transition-all relative shadow-sm cursor-pointer ${permission === 'granted'
+                            ? 'text-primary border-primary/30'
+                            : 'text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary'
+                            }`}
+                        title={permission === 'granted' ? 'Notifikasi Aktif' : 'Aktifkan Notifikasi'}
+                    >
                         <span className="material-symbols-outlined">
-                            notifications
+                            {permission === 'granted' ? 'notifications_active' : 'notifications'}
                         </span>
-                        <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-primary rounded-full border border-white dark:border-[#111418]"></span>
+                        {permission !== 'granted' && (
+                            <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-primary rounded-full border border-white dark:border-[#111418]"></span>
+                        )}
                     </button>
                 </div>
             </div>
@@ -86,8 +97,8 @@ export default function Jadwal() {
             {/* Notification Toast */}
             {notification && (
                 <div className={`fixed bottom-6 right-6 z-[100] px-5 py-3 rounded-xl shadow-lg shadow-black/5 flex items-center gap-3 animate-[slideIn_0.3s_ease-out] border ${notification.type === 'error'
-                        ? 'bg-red-50 dark:bg-red-900/30 border-red-200 dark:border-red-800 text-red-700 dark:text-red-400'
-                        : 'bg-green-50 dark:bg-green-900/30 border-green-200 dark:border-green-800 text-green-700 dark:text-green-400'
+                    ? 'bg-red-50 dark:bg-red-900/30 border-red-200 dark:border-red-800 text-red-700 dark:text-red-400'
+                    : 'bg-green-50 dark:bg-green-900/30 border-green-200 dark:border-green-800 text-green-700 dark:text-green-400'
                     }`}>
                     <span className="material-symbols-outlined text-xl">
                         {notification.type === 'error' ? 'info' : 'check_circle'}

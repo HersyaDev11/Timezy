@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
+import { useScheduleNotifications } from "../../hooks/useScheduleNotifications";
 
 export default function Sidebar() {
+    const { isSupported, permission, requestPermission } = useScheduleNotifications();
 
     return (
         <aside className="flex w-64 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111418] shrink-0 h-full overflow-y-auto">
@@ -116,8 +118,33 @@ export default function Sidebar() {
                     </a>
                 </nav>
 
+                {/* Notification Settings */}
+                {isSupported && permission !== 'granted' && (
+                    <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-3 mt-auto">
+                        <div className="flex items-start gap-2">
+                            <span className="material-symbols-outlined text-amber-500 text-lg">
+                                notifications_active
+                            </span>
+                            <div className="flex-1">
+                                <h4 className="text-xs font-bold text-amber-800 dark:text-amber-400 mb-1">
+                                    Aktifkan Pengingat
+                                </h4>
+                                <p className="text-[10px] text-amber-700 dark:text-amber-500 mb-2 leading-tight">
+                                    Dapatkan notifikasi sebelum jadwal Anda dimulai.
+                                </p>
+                                <button
+                                    onClick={requestPermission}
+                                    className="text-[10px] font-bold bg-amber-500 text-white px-2 py-1 rounded w-full hover:bg-amber-600 transition-colors"
+                                >
+                                    Izinkan Notifikasi
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 {/* Start Focus Button */}
-                <button className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg py-3 px-4 bg-primary hover:bg-blue-600 text-white shadow-lg shadow-primary/30 transition-all">
+                <button className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg py-3 px-4 bg-primary hover:bg-blue-600 text-white shadow-lg shadow-primary/30 transition-all mt-4">
                     <span className="material-symbols-outlined text-[20px]">
                         play_arrow
                     </span>
