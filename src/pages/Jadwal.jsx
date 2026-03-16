@@ -35,7 +35,7 @@ export default function Jadwal() {
                             placeholder="Cari mata kuliah, tugas..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full bg-slate-100 dark:bg-[#111418] border-none rounded-xl pl-10 pr-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary/20 transition-all text-slate-900 dark:text-white placeholder:text-slate-500"
+                            className="w-full bg-slate-100 dark:bg-[#0f172a] border-none rounded-xl pl-10 pr-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary/20 transition-all text-slate-900 dark:text-white placeholder:text-slate-500"
                         />
                     </div>
                 </div>
@@ -50,7 +50,7 @@ export default function Jadwal() {
                     </div>
                     <button
                         onClick={requestPermission}
-                        className={`w-10 h-10 flex items-center justify-center rounded-xl bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-800 transition-all relative shadow-sm cursor-pointer ${permission === 'granted'
+                        className={`w-10 h-10 flex items-center justify-center rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 transition-all relative shadow-sm cursor-pointer ${permission === 'granted'
                             ? 'text-primary border-primary/30'
                             : 'text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary'
                             }`}
@@ -60,7 +60,7 @@ export default function Jadwal() {
                             {permission === 'granted' ? 'notifications_active' : 'notifications'}
                         </span>
                         {permission !== 'granted' && (
-                            <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-primary rounded-full border border-white dark:border-[#111418]"></span>
+                            <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-primary rounded-full border border-white dark:border-[#0f172a]"></span>
                         )}
                     </button>
                 </div>
@@ -73,7 +73,7 @@ export default function Jadwal() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Left Side: Calendar / Main View */}
                 <div className="lg:col-span-2 flex flex-col gap-4">
-                    <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111418] overflow-hidden shadow-sm flex flex-col h-full min-h-[500px]">
+                    <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0f172a] overflow-hidden shadow-sm flex flex-col h-full min-h-[500px]">
                         <CalendarHeader onAddClick={() => setIsModalOpen(true)} />
                         {currentView === 'calendar' && <CalendarGrid />}
                         {currentView === 'week' && <WeekGrid />}

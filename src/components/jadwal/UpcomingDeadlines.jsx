@@ -37,7 +37,7 @@ export default function UpcomingDeadlines() {
     };
 
     return (
-        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111418] overflow-hidden shadow-sm flex-1 flex flex-col">
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0f172a] overflow-hidden shadow-sm flex-1 flex flex-col">
             <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center shrink-0">
                 <h3 className="font-bold text-slate-900 dark:text-white">
                     Deadline Tugas
@@ -59,7 +59,7 @@ export default function UpcomingDeadlines() {
                     </div>
                 ) : (
                     deadlines.map(deadline => (
-                        <div key={deadline.id} className="p-4 flex items-center justify-between group hover:bg-slate-50 dark:hover:bg-[#1c2632] transition-colors cursor-pointer relative">
+                        <div key={deadline.id} className="p-4 flex items-center justify-between group hover:bg-slate-50 dark:hover:bg-[#1E293B] transition-colors cursor-pointer relative">
                             <div className="flex items-center gap-3">
                                 <div className={`w-2 h-2 rounded-full ${getBulletColor(deadline.colorClass)}`}></div>
                                 <div className="flex flex-col">
@@ -96,7 +96,7 @@ export default function UpcomingDeadlines() {
                 )}
             </div>
 
-            <div className="p-3 bg-slate-50 dark:bg-[#1c2632]/50 shrink-0">
+            <div className="p-3 bg-slate-50 dark:bg-[#1E293B]/50 shrink-0">
                 <button
                     onClick={() => window.dispatchEvent(new CustomEvent('open-schedule-modal'))}
                     className="flex w-full cursor-pointer items-center justify-center gap-1 rounded-lg py-2 border border-dashed border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400 text-xs font-medium hover:border-primary hover:text-primary transition-colors"

@@ -3,7 +3,7 @@ export default function Header() {
         <header className="flex justify-between items-end flex-wrap gap-4">
             <div className="flex flex-col gap-1">
                 <h1 className="text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                    Selamat Pagi, Alex! 👋
+                    Selamat Pagi, Taufan! 👋
                 </h1>
                 <p className="text-slate-500 dark:text-slate-400 text-base font-medium">
                     Siap untuk menaklukkan hari ini?

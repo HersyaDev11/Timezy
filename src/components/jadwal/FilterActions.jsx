@@ -6,7 +6,7 @@ export default function FilterActions() {
     const getBtnClass = (filterName) => {
         return activeFilter === filterName
             ? "flex cursor-pointer items-center gap-2 px-4 py-2 rounded-full bg-primary text-white text-sm font-medium shadow-md shadow-primary/20 transition-all whitespace-nowrap"
-            : "flex cursor-pointer items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all whitespace-nowrap";
+            : "flex cursor-pointer items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all whitespace-nowrap";
     };
 
     return (
@@ -41,22 +41,22 @@ export default function FilterActions() {
                     Pribadi
                 </button>
             </div>
-            <div className="flex items-center gap-2 bg-white dark:bg-[#111418] p-1 rounded-lg border border-slate-200 dark:border-slate-800">
+            <div className="flex items-center gap-2 bg-white dark:bg-[#0f172a] p-1 rounded-lg border border-slate-200 dark:border-slate-800">
                 <button
                     onClick={() => setCurrentView("calendar")}
-                    className={`p-1.5 cursor-pointer rounded transition-colors ${currentView === 'calendar' ? 'bg-slate-50 dark:bg-[#1c2632] text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-primary'}`}
+                    className={`p-1.5 cursor-pointer rounded transition-colors ${currentView === 'calendar' ? 'bg-slate-50 dark:bg-[#1E293B] text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-primary'}`}
                 >
                     <span className="material-symbols-outlined text-xl">calendar_month</span>
                 </button>
                 <button
                     onClick={() => setCurrentView("week")}
-                    className={`p-1.5 cursor-pointer rounded transition-colors ${currentView === 'week' ? 'bg-slate-50 dark:bg-[#1c2632] text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-primary'}`}
+                    className={`p-1.5 cursor-pointer rounded transition-colors ${currentView === 'week' ? 'bg-slate-50 dark:bg-[#1E293B] text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-primary'}`}
                 >
                     <span className="material-symbols-outlined text-xl">view_week</span>
                 </button>
                 <button
                     onClick={() => setCurrentView("list")}
-                    className={`p-1.5 cursor-pointer rounded transition-colors ${currentView === 'list' ? 'bg-slate-50 dark:bg-[#1c2632] text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-primary'}`}
+                    className={`p-1.5 cursor-pointer rounded transition-colors ${currentView === 'list' ? 'bg-slate-50 dark:bg-[#1E293B] text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-primary'}`}
                 >
                     <span className="material-symbols-outlined text-xl">list</span>
                 </button>

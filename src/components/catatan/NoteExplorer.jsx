@@ -26,7 +26,7 @@ export default function NoteExplorer() {
                         <input
                             type="text"
                             placeholder="Cari catatan..."
-                            className="w-full pl-9 pr-3 py-2 bg-slate-50 dark:bg-[#1c2632] border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:border-primary dark:focus:border-primary text-slate-900 dark:text-white placeholder:text-slate-500"
+                            className="w-full pl-9 pr-3 py-2 bg-slate-50 dark:bg-[#1E293B] border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:border-primary dark:focus:border-primary text-slate-900 dark:text-white placeholder:text-slate-500"
                         />
                     </div>
                 </div>
@@ -46,13 +46,13 @@ export default function NoteExplorer() {
                         <span className="text-sm font-semibold text-slate-600 dark:text-slate-400 group-hover:text-primary transition-colors">Catatan Baru</span>
                     </button>
                     {/* Placeholder action cards */}
-                    <button className="flex-shrink-0 w-40 h-32 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-[#1c2632] flex flex-col gap-2 p-4 hover:border-primary/50 transition-colors text-left group">
+                    <button className="flex-shrink-0 w-40 h-32 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-[#1E293B] flex flex-col gap-2 p-4 hover:border-primary/50 transition-colors text-left group">
                         <div className="text-blue-500 bg-blue-100 dark:bg-blue-900/30 w-8 h-8 rounded-lg flex items-center justify-center mb-auto">
                             <span className="material-symbols-outlined text-[18px]">menu_book</span>
                         </div>
                         <span className="text-sm font-semibold text-slate-800 dark:text-slate-200 group-hover:text-primary line-clamp-2">Template Kuliah</span>
                     </button>
-                    <button className="flex-shrink-0 w-40 h-32 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-[#1c2632] flex flex-col gap-2 p-4 hover:border-primary/50 transition-colors text-left group">
+                    <button className="flex-shrink-0 w-40 h-32 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-[#1E293B] flex flex-col gap-2 p-4 hover:border-primary/50 transition-colors text-left group">
                         <div className="text-purple-500 bg-purple-100 dark:bg-purple-900/30 w-8 h-8 rounded-lg flex items-center justify-center mb-auto">
                             <span className="material-symbols-outlined text-[18px]">lightbulb</span>
                         </div>

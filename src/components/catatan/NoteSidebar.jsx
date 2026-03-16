@@ -11,13 +11,13 @@ export default function NoteSidebar() {
                 <div className="flex bg-slate-100 dark:bg-slate-800 rounded-lg p-0.5">
                     <button
                         onClick={() => setView('context')}
-                        className={`px-3 py-1.5 text-xs font-bold rounded-md transition-all ${view === 'context' ? 'bg-white dark:bg-[#1c2632] shadow-sm text-primary' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}`}
+                        className={`px-3 py-1.5 text-xs font-bold rounded-md transition-all ${view === 'context' ? 'bg-white dark:bg-[#1E293B] shadow-sm text-primary' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}`}
                     >
                         Konteks
                     </button>
                     <button
                         onClick={() => setView('chat')}
-                        className={`px-3 py-1.5 text-xs font-bold rounded-md transition-all flex items-center gap-1.5 ${view === 'chat' ? 'bg-white dark:bg-[#1c2632] shadow-sm text-primary' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}`}
+                        className={`px-3 py-1.5 text-xs font-bold rounded-md transition-all flex items-center gap-1.5 ${view === 'chat' ? 'bg-white dark:bg-[#1E293B] shadow-sm text-primary' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}`}
                     >
                         <span className="material-symbols-outlined text-[14px]">psychology</span>
                         Chat
@@ -51,11 +51,11 @@ export default function NoteSidebar() {
                     <div>
                         <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Catatan Terkait</h4>
                         <div className="flex flex-col gap-2">
-                            <a href="#" className="p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-primary/50 dark:hover:border-primary/50 hover:bg-slate-50 dark:hover:bg-[#1c2632] transition-all group">
+                            <a href="#" className="p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-primary/50 dark:hover:border-primary/50 hover:bg-slate-50 dark:hover:bg-[#1E293B] transition-all group">
                                 <h5 className="text-sm font-bold text-slate-800 dark:text-slate-200 mb-1 group-hover:text-primary transition-colors">Pengenalan Waterfall</h5>
                                 <p className="text-xs text-slate-500 line-clamp-2">Perbedaan mendasar antara metode klasik waterfall dan agile modern...</p>
                             </a>
-                            <a href="#" className="p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-primary/50 dark:hover:border-primary/50 hover:bg-slate-50 dark:hover:bg-[#1c2632] transition-all group">
+                            <a href="#" className="p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-primary/50 dark:hover:border-primary/50 hover:bg-slate-50 dark:hover:bg-[#1E293B] transition-all group">
                                 <h5 className="text-sm font-bold text-slate-800 dark:text-slate-200 mb-1 group-hover:text-primary transition-colors">Kanban Board</h5>
                                 <p className="text-xs text-slate-500 line-clamp-2">Visualisasi alur kerja menggunakan papan Kanban untuk efisiensi.</p>
                             </a>
@@ -65,7 +65,7 @@ export default function NoteSidebar() {
                     {/* Integration Calendar Widget */}
                     <div>
                         <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Relevansi Jadwal</h4>
-                        <div className="bg-slate-50 dark:bg-[#1c2632] rounded-xl p-3 border border-slate-100 dark:border-slate-800">
+                        <div className="bg-slate-50 dark:bg-[#1E293B] rounded-xl p-3 border border-slate-100 dark:border-slate-800">
                             <div className="flex items-center gap-3 mb-3 pb-3 border-b border-slate-200 dark:border-slate-700">
                                 <div className="flex flex-col items-center justify-center w-10 h-10 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-600 shadow-sm shrink-0">
                                     <span className="text-[10px] text-slate-500 font-bold uppercase">Mar</span>

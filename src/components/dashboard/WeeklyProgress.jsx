@@ -15,7 +15,7 @@ export default function WeeklyProgress() {
                 <h2 className="text-lg font-bold text-slate-900 dark:text-white">
                     Aktivitas Mingguan
                 </h2>
-                <select className="bg-slate-100 dark:bg-[#111418] border-none text-xs text-slate-600 dark:text-slate-300 rounded-lg py-1 px-3 focus:ring-1 focus:ring-primary outline-none">
+                <select className="bg-slate-100 dark:bg-[#0f172a] border-none text-xs text-slate-600 dark:text-slate-300 rounded-lg py-1 px-3 focus:ring-1 focus:ring-primary outline-none">
                     <option>Minggu Ini</option>
                     <option>Minggu Lalu</option>
                 </select>

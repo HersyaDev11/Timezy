@@ -86,7 +86,7 @@ export default function CalendarGrid() {
                             key={day.date}
                             className={`group h-24 md:h-32 p-2 border rounded-xl transition-colors cursor-pointer relative flex flex-col overflow-hidden ${day.isToday
                                 ? "border-primary bg-primary/5 dark:bg-primary/10"
-                                : "border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#111418]/30 hover:border-primary"
+                                : "border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a]/30 hover:border-primary"
                                 }`}
                         >
                             {day.isToday ? (

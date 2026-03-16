@@ -5,7 +5,7 @@ export default function Sidebar() {
     const { isSupported, permission, requestPermission } = useScheduleNotifications();
 
     return (
-        <aside className="flex w-64 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111418] shrink-0 h-full overflow-y-auto">
+        <aside className="flex w-64 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0f172a] shrink-0 h-full overflow-y-auto">
             <div className="flex flex-col gap-4 p-4 h-full">
                 {/* User Profile */}
                 <div className="flex gap-3 items-center mb-4">
@@ -19,10 +19,10 @@ export default function Sidebar() {
                     ></div>
                     <div className="flex flex-col">
                         <h1 className="text-slate-900 dark:text-white text-base font-bold leading-tight">
-                            Mahasiswa Central
+                            Taufan
                         </h1>
                         <p className="text-slate-500 dark:text-slate-400 text-xs font-normal">
-                            Semester 4
+                            Semester 6
                         </p>
                     </div>
                 </div>
@@ -30,11 +30,11 @@ export default function Sidebar() {
                 {/* Navigation Links */}
                 <nav className="flex flex-col gap-2 flex-1">
                     <NavLink
-                        to="/"
+                        to="/dashboard"
                         className={({ isActive }) =>
                             `flex items-center gap-3 px-3 py-3 rounded-lg transition-colors ${isActive
                                 ? "bg-primary/10 text-primary dark:bg-[#283039] dark:text-white font-semibold"
-                                : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1c2632] font-medium"
+                                : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1E293B] font-medium"
                             }`
                         }
                     >
@@ -51,7 +51,7 @@ export default function Sidebar() {
                         className={({ isActive }) =>
                             `flex items-center gap-3 px-3 py-3 rounded-lg transition-colors ${isActive
                                 ? "bg-primary/10 text-primary dark:bg-[#283039] dark:text-white font-semibold"
-                                : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1c2632] font-medium"
+                                : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1E293B] font-medium"
                             }`
                         }
                     >
@@ -64,7 +64,7 @@ export default function Sidebar() {
                         <span>Jadwal</span>
                     </NavLink>
                     <a
-                        className="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1c2632] transition-colors"
+                        className="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1E293B] transition-colors"
                         href="#"
                     >
                         <span
@@ -76,7 +76,7 @@ export default function Sidebar() {
                         <span className="text-sm font-medium">Tugas</span>
                     </a>
                     <a
-                        className="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1c2632] transition-colors"
+                        className="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1E293B] transition-colors"
                         href="#"
                     >
                         <span
@@ -92,7 +92,7 @@ export default function Sidebar() {
                         className={({ isActive }) =>
                             `flex items-center gap-3 px-3 py-3 rounded-lg transition-colors ${isActive
                                 ? "bg-primary/10 text-primary dark:bg-[#283039] dark:text-white font-semibold"
-                                : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1c2632] font-medium"
+                                : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1E293B] font-medium"
                             }`
                         }
                     >
@@ -104,8 +104,8 @@ export default function Sidebar() {
                         </span>
                         <span>Catatan</span>
                     </NavLink>
-                    <a
-                        className="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1c2632] transition-colors"
+                    {/* <a
+                        className="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1E293B] transition-colors"
                         href="#"
                     >
                         <span
@@ -115,7 +115,7 @@ export default function Sidebar() {
                             settings
                         </span>
                         <span className="text-sm font-medium">Pengaturan</span>
-                    </a>
+                    </a> */}
                 </nav>
 
                 {/* Notification Settings */}
@@ -150,6 +150,14 @@ export default function Sidebar() {
                     </span>
                     <span className="text-sm font-bold tracking-wide">
                         Mulai Sesi Fokus
+                    </span>
+                </button>
+                <button link="/" className="flex w-full cursor-pointer items-center justify-center rounded-lg py-3 px-4 bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-primary/30 transition-all mt-1">
+                    <span className="material-symbols-outlined text-[20px]">
+                        logout
+                    </span>
+                    <span className="text-sm font-bold tracking-wide">
+                        Log out
                     </span>
                 </button>
             </div>

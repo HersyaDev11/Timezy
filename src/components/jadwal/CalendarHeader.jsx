@@ -22,7 +22,7 @@ export default function CalendarHeader({ onAddClick }) {
                 </button>
                 <button
                     onClick={prevMonth}
-                    className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#111418] text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors cursor-pointer"
+                    className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#0f172a] text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors cursor-pointer"
                 >
                     <span className="material-symbols-outlined">
                         chevron_left
@@ -30,13 +30,13 @@ export default function CalendarHeader({ onAddClick }) {
                 </button>
                 <button
                     onClick={goToToday}
-                    className="px-3 py-1 text-sm font-medium rounded-md hover:bg-slate-100 dark:hover:bg-[#111418] dark:text-slate-300 dark:hover:text-white transition-colors cursor-pointer"
+                    className="px-3 py-1 text-sm font-medium rounded-md hover:bg-slate-100 dark:hover:bg-[#0f172a] dark:text-slate-300 dark:hover:text-white transition-colors cursor-pointer"
                 >
                     Hari Ini
                 </button>
                 <button
                     onClick={nextMonth}
-                    className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#111418] text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors cursor-pointer"
+                    className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#0f172a] text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors cursor-pointer"
                 >
                     <span className="material-symbols-outlined">
                         chevron_right

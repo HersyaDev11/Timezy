@@ -67,7 +67,7 @@ export default function ChatPanel() {
     };
 
     return (
-        <div className="flex flex-col h-full bg-slate-50 dark:bg-[#1c2632] rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+        <div className="flex flex-col h-full bg-slate-50 dark:bg-[#1E293B] rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
             {/* Chat History Area */}
             <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 scroll-smooth">
                 {messages.map((msg) => (
@@ -122,7 +122,7 @@ export default function ChatPanel() {
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         placeholder="Tanya asisten..."
-                        className="w-full pl-4 pr-12 py-2.5 bg-slate-50 dark:bg-[#1c2632] border border-slate-200 dark:border-slate-700 rounded-full text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-slate-900 dark:text-white placeholder:text-slate-500"
+                        className="w-full pl-4 pr-12 py-2.5 bg-slate-50 dark:bg-[#1E293B] border border-slate-200 dark:border-slate-700 rounded-full text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-slate-900 dark:text-white placeholder:text-slate-500"
                     />
                     <button
                         type="submit"

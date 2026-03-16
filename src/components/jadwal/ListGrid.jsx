@@ -23,12 +23,12 @@ export default function ListGrid() {
                     filteredSchedules
                         .sort((a, b) => new Date(a.date) - new Date(b.date))
                         .map(schedule => (
-                            <div key={schedule.id} className="flex flex-col sm:flex-row gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#111418]/50 items-start sm:items-center">
+                            <div key={schedule.id} className="flex flex-col sm:flex-row gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a]/50 items-start sm:items-center">
                                 <div className="min-w-[100px]">
                                     <span className="text-sm font-bold text-slate-900 dark:text-white block">{schedule.date}</span>
                                     <span className="text-xs text-slate-500">{schedule.startTime}</span>
                                 </div>
-                                <div className={`flex-1 px-4 py-2 border-l-4 rounded bg-white dark:bg-[#1c2632] ${getEventStyles(schedule.colorClass)}`}>
+                                <div className={`flex-1 px-4 py-2 border-l-4 rounded bg-white dark:bg-[#1E293B] ${getEventStyles(schedule.colorClass)}`}>
                                     <h4 className="font-bold text-sm">{schedule.title}</h4>
                                     <p className="text-xs opacity-80">{schedule.subtitle}</p>
                                 </div>

@@ -3,6 +3,7 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import Dashboard from "./pages/Dashboard";
 import Jadwal from "./pages/Jadwal";
 import Catatan from "./pages/Catatan";
+import LandingPage from "./pages/LandingPage";
 import { ScheduleProvider } from "./context/ScheduleContext";
 import { NotesProvider } from "./context/NotesContext";
 
@@ -12,16 +13,17 @@ function App() {
       <NotesProvider>
         <BrowserRouter>
           <Routes>
+            {/* Landing Page */}
+            <Route path="/" element={<LandingPage />} />
+
             {/* Layout for Dashboard specific pages */}
             <Route element={<DashboardLayout />}>
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/jadwal" element={<Jadwal />} />
               <Route path="/catatan" element={<Catatan />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
             </Route>
-
-            {/* Landing page from Dev Taufan can be added here without the Dashboard Layout */}
-            {/* <Route path="/landing" element={<LandingPage />} /> */}
+            
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </BrowserRouter>
       </NotesProvider>

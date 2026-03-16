@@ -26,39 +26,39 @@ export default function TodaySchedule() {
                     };
                 }
                 return {
-                    wrapper: "bg-slate-50 dark:bg-[#111418] hover:border-primary/50 cursor-pointer",
+                    wrapper: "bg-slate-50 dark:bg-[#0f172a] hover:border-primary/50 cursor-pointer",
                     icon: "book",
                     iconColor: "text-blue-500",
-                    timeBadge: "text-slate-900 dark:text-white bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-800",
+                    timeBadge: "text-slate-900 dark:text-white bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800",
                 };
             case 'Pribadi':
                 return {
-                    wrapper: "bg-slate-50 dark:bg-[#111418] hover:border-green-500/50 cursor-pointer",
+                    wrapper: "bg-slate-50 dark:bg-[#0f172a] hover:border-green-500/50 cursor-pointer",
                     icon: "fitness_center",
                     iconColor: "text-green-500",
-                    timeBadge: "text-slate-900 dark:text-white bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-800",
+                    timeBadge: "text-slate-900 dark:text-white bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800",
                 };
             case 'Organisasi':
                 return {
-                    wrapper: "bg-slate-50 dark:bg-[#111418] hover:border-purple-500/50 cursor-pointer",
+                    wrapper: "bg-slate-50 dark:bg-[#0f172a] hover:border-purple-500/50 cursor-pointer",
                     icon: "groups",
                     iconColor: "text-purple-500",
-                    timeBadge: "text-slate-900 dark:text-white bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-800",
+                    timeBadge: "text-slate-900 dark:text-white bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800",
                 };
             case 'Tugas':
             default:
                 return {
-                    wrapper: "bg-slate-50 dark:bg-[#111418] hover:border-amber-500/50 cursor-pointer",
+                    wrapper: "bg-slate-50 dark:bg-[#0f172a] hover:border-amber-500/50 cursor-pointer",
                     icon: "assignment",
                     iconColor: "text-amber-500",
-                    timeBadge: "text-slate-900 dark:text-white bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-800",
+                    timeBadge: "text-slate-900 dark:text-white bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800",
                 };
         }
     }
 
 
     return (
-        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111418] overflow-hidden shadow-sm">
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0f172a] overflow-hidden shadow-sm">
             <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
                 <h3 className="font-bold text-slate-900 dark:text-white">
                     Jadwal Hari Ini
