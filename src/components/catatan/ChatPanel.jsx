@@ -1,19 +1,15 @@
-import { useState } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
+import { TaskContext } from "../../context/TaskContext";
 
 export default function ChatPanel() {
+    const { tasks, addTask } = useContext(TaskContext);
+    const messagesEndRef = useRef(null);
+
     const [messages, setMessages] = useState([
         {
             id: 1,
             sender: "ai",
-            text: "Halo! Saya Asisten Belajar Anda. Ada yang bisa saya bantu dengan catatan ini?",
-            time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
-        },
-        {
-            id: 2,
-            sender: "ai",
-            text: "Saya mendeteksi 3 tugas potensial dalam catatan ini. Ingin saya sinkronkan ke daftar jadwal Anda?",
-            isAction: true,
-            actionLabel: "Ya, Sinkronkan",
+            text: "Halo! Saya Asisten Belajar Anda. Ada yang bisa saya bantu hari ini?",
             time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
         }
     ]);
@@ -21,14 +17,20 @@ export default function ChatPanel() {
     const [input, setInput] = useState("");
     const [isTyping, setIsTyping] = useState(false);
 
+    // Auto-scroll to bottom
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages, isTyping]);
+
     const handleSend = (e) => {
         e?.preventDefault();
         if (!input.trim()) return;
 
+        const currentInput = input;
         const newUserMessage = {
             id: Date.now(),
             sender: "user",
-            text: input,
+            text: currentInput,
             time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
         };
 
@@ -36,34 +38,113 @@ export default function ChatPanel() {
         setInput("");
         setIsTyping(true);
 
-        // Mock AI Response
+        // Process AI Response
         setTimeout(() => {
-            const aiResponse = {
-                id: Date.now() + 1,
-                sender: "ai",
-                text: getMockResponse(newUserMessage.text),
-                time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
-            };
+            const aiResponse = generateAIResponse(currentInput);
             setMessages((prev) => [...prev, aiResponse]);
             setIsTyping(false);
-        }, 1500);
+        }, 1200);
     };
 
-    const getMockResponse = (text) => {
+    const generateAIResponse = (text) => {
         const lowerText = text.toLowerCase();
-        if (lowerText.includes("jelaskan") || lowerText.includes("apa itu")) {
-            return "Berdasarkan catatan Anda, Scrum adalah kerangka kerja di mana orang-orang dapat mengatasi masalah kompleks secara adaptif, sambil secara produktif dan kreatif memberikan produk bernilai setinggi mungkin.";
+        
+        // --- 1. GREETING INTENT ---
+        if (lowerText.match(/^(halo|hai|pagi|siang|sore|malam|hi)/)) {
+            const activeTasksCount = tasks.filter(t => !t.completed).length;
+            return {
+                id: Date.now() + 1,
+                sender: "ai",
+                text: `Halo juga! 👋 Saya siap membantu. Saat ini Anda punya ${activeTasksCount} tugas aktif. Mau saya rincikan atau ada pertanyaan tentang catatan Anda?`,
+                time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+            };
         }
-        if (lowerText.includes("jadwal") || lowerText.includes("tugas")) {
-            return "Saat ini ada 3 tugas yang belum diselesaikan pada minggu ini. Anda punya Kuis Singkat Agile yang belum dikerjakan.";
+
+        // --- 2. ADD TASK COMMAND ---
+        if (lowerText.includes("tambahkan tugas") || lowerText.includes("ingatkan saya untuk") || lowerText.includes("buat tugas")) {
+            // Very simple extraction: grab text after the keyword
+            let taskName = text;
+            if (lowerText.includes("tambahkan tugas")) taskName = text.substring(lowerText.indexOf("tambahkan tugas") + 15).trim();
+            else if (lowerText.includes("ingatkan saya untuk")) taskName = text.substring(lowerText.indexOf("ingatkan saya untuk") + 19).trim();
+            else if (lowerText.includes("buat tugas")) taskName = text.substring(lowerText.indexOf("buat tugas") + 10).trim();
+            
+            if (!taskName) taskName = "Tugas Baru";
+
+            // capitalize first letter
+            taskName = taskName.charAt(0).toUpperCase() + taskName.slice(1);
+
+            return {
+                id: Date.now() + 1,
+                sender: "ai",
+                text: `Baik! Ingin saya tambahkan "${taskName}" ke dalam daftar tugas Anda?`,
+                isAction: true,
+                actionLabel: "Ya, Tambahkan",
+                actionPayload: { type: "ADD_TASK", data: taskName },
+                time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+            };
         }
-        return "Tentu, saya mencatat pertanyaan Anda. Sebagai AI simulasi, saya belum bisa membedah konteks lebih dalam, namun saya akan menyimpan wawasan ini ke dalam database Anda.";
+
+        // --- 3. TASK QUERY INTENT ---
+        if (lowerText.includes("tugas") || lowerText.includes("belum selesai") || lowerText.includes("jadwal")) {
+            const activeTasks = tasks.filter(t => !t.completed);
+            
+            if (activeTasks.length === 0) {
+                return {
+                    id: Date.now() + 1,
+                    sender: "ai",
+                    text: "Selamat! 🎉 Semua tugas Anda sudah selesai saat ini.",
+                    time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+                };
+            }
+
+            const taskListString = activeTasks.map((t, i) => `${i + 1}. ${t.title}`).join("\n");
+            return {
+                id: Date.now() + 1,
+                sender: "ai",
+                text: `Saat ini ada ${activeTasks.length} tugas yang belum diselesaikan:\n\n${taskListString}`,
+                time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+            };
+        }
+
+        // --- 4. EXPLAIN/NOTE INTENT ---
+        if (lowerText.includes("jelaskan") || lowerText.includes("apa itu") || lowerText.includes("catatan") || lowerText.includes("ringkas")) {
+            return {
+                id: Date.now() + 1,
+                sender: "ai",
+                text: "Berdasarkan konteks catatan yang saya pindai secara umum, pokok batas bahasan berpusat pada pemecahan masalah secara iteratif dan menjaga fokus secara bertahap (agile/scrum). Ada bagian yang rasanya kurang jelas?",
+                time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+            };
+        }
+
+        // --- 5. DEFAULT FALLBACK ---
+        return {
+            id: Date.now() + 1,
+            sender: "ai",
+            text: "Wah, menarik! Sayangnya kemampuan saya masih terbatas untuk menjawab hal tersebut secara rinci. Anda bisa meminta saya untuk:\n• Membacakan daftar tugas\n• Menambahkan tugas baru\n• Meringkas catatan",
+            time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+        };
     };
 
-    const handleActionClick = (msgId) => {
+    const handleActionClick = (msgId, actionPayload) => {
+        // Execute the action
+        if (actionPayload && actionPayload.type === "ADD_TASK") {
+            addTask(actionPayload.data, "AI Generated");
+        }
+
+        // Update message state to show it was executed
         setMessages(prev => prev.map(msg =>
-            msg.id === msgId ? { ...msg, actionLabel: "Tersinkron", disabled: true } : msg
+            msg.id === msgId ? { ...msg, actionLabel: "Berhasil Ditambahkan!", disabled: true } : msg
         ));
+
+        // Add confirmation message
+        setTimeout(() => {
+            setMessages((prev) => [...prev, {
+                id: Date.now(),
+                sender: "ai",
+                text: `Oke, tugas "${actionPayload.data}" sudah saya tambahkan ke daftar Anda. Anda bisa melihatnya di menu Tugas.`,
+                time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+            }]);
+        }, 500);
     };
 
     return (
@@ -82,11 +163,11 @@ export default function ChatPanel() {
                             {/* Action Button for AI (if any) */}
                             {msg.isAction && (
                                 <button
-                                    onClick={() => handleActionClick(msg.id)}
+                                    onClick={() => handleActionClick(msg.id, msg.actionPayload)}
                                     disabled={msg.disabled}
                                     className={`mt-2 w-full py-1.5 px-3 rounded-lg text-xs font-bold transition-all ${msg.disabled
-                                            ? 'bg-slate-100 text-slate-400 dark:bg-slate-700/50 cursor-not-allowed'
-                                            : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm'
+                                            ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 cursor-not-allowed border border-green-200 dark:border-green-800'
+                                            : 'bg-primary text-white hover:bg-blue-600 shadow-sm'
                                         }`}
                                 >
                                     {msg.actionLabel}
@@ -112,6 +193,7 @@ export default function ChatPanel() {
                         </div>
                     </div>
                 )}
+                <div ref={messagesEndRef} />
             </div>
 
             {/* Chat Input Area */}
@@ -126,7 +208,7 @@ export default function ChatPanel() {
                     />
                     <button
                         type="submit"
-                        disabled={!input.trim()}
+                        disabled={!input.trim() || isTyping}
                         className="absolute right-2 w-8 h-8 flex items-center justify-center bg-primary text-white rounded-full hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                     >
                         <span className="material-symbols-outlined text-[16px]">send</span>

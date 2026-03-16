@@ -63,9 +63,14 @@ export default function Sidebar() {
                         </span>
                         <span>Jadwal</span>
                     </NavLink>
-                    <a
-                        className="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1c2632] transition-colors"
-                        href="#"
+                    <NavLink
+                        to="/tugas"
+                        className={({ isActive }) =>
+                            `flex items-center gap-3 px-3 py-3 rounded-lg transition-colors ${isActive
+                                ? "bg-primary/10 text-primary dark:bg-[#283039] dark:text-white font-semibold"
+                                : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1c2632] font-medium"
+                            }`
+                        }
                     >
                         <span
                             className="material-symbols-outlined"
@@ -73,11 +78,16 @@ export default function Sidebar() {
                         >
                             checklist
                         </span>
-                        <span className="text-sm font-medium">Tugas</span>
-                    </a>
-                    <a
-                        className="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1c2632] transition-colors"
-                        href="#"
+                        <span>Tugas</span>
+                    </NavLink>
+                    <NavLink
+                        to="/fokus"
+                        className={({ isActive }) =>
+                            `flex items-center gap-3 px-3 py-3 rounded-lg transition-colors ${isActive
+                                ? "bg-primary/10 text-primary dark:bg-[#283039] dark:text-white font-semibold"
+                                : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1c2632] font-medium"
+                            }`
+                        }
                     >
                         <span
                             className="material-symbols-outlined"
@@ -85,8 +95,8 @@ export default function Sidebar() {
                         >
                             timer
                         </span>
-                        <span className="text-sm font-medium">Fokus</span>
-                    </a>
+                        <span>Fokus</span>
+                    </NavLink>
                     <NavLink
                         to="/catatan"
                         className={({ isActive }) =>
@@ -144,14 +154,17 @@ export default function Sidebar() {
                 )}
 
                 {/* Start Focus Button */}
-                <button className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg py-3 px-4 bg-primary hover:bg-blue-600 text-white shadow-lg shadow-primary/30 transition-all mt-4">
+                <NavLink 
+                    to="/fokus"
+                    className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg py-3 px-4 bg-primary hover:bg-blue-600 text-white shadow-lg shadow-primary/30 transition-all mt-4"
+                >
                     <span className="material-symbols-outlined text-[20px]">
                         play_arrow
                     </span>
                     <span className="text-sm font-bold tracking-wide">
                         Mulai Sesi Fokus
                     </span>
-                </button>
+                </NavLink>
             </div>
         </aside>
     );
