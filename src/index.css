@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-primary: #137fec;
+  --color-background-light: #0f172a;
+  --color-background-dark: #0f172a;
+  --color-surface-dark: #1E293B;
+  --color-surface-highlight: #25303d;
+
+  --font-display: "Manrope", sans-serif;
+  --font-sans: "Manrope", sans-serif;
+
+  --radius-DEFAULT: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+}
+
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/container-queries";
+@plugin "@tailwindcss/typography";
+
+@layer base {
+  body {
+    font-family: var(--font-display);
+    background-color: var(--color-background-dark);
+    color: #f1f5f9; /* text-slate-100 */
+    color-scheme: dark;
+  }
+
+  /* Custom scrollbar for better aesthetic */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-background-dark);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-surface-highlight);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+  }
+}
