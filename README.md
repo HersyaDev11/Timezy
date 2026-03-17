@@ -1,10 +1,13 @@
-# ⏳ Timezy - Kuasai Waktu, Raih Prestasi
+# ⏳ Timezy - Kuasai Waktu, Raih Prestasi TIM KATANYA JANGAN BOS UDIN
 
 <div align="center">
   <p><b>Platform manajemen waktu dan produktivitas all-in-one yang dirancang khusus untuk mahasiswa ambisius dan kolaborator modern.</b></p>
 </div>
 
 ---
+
+LINK HOSTING: https://timezy-three.vercel.app/
+LINK GITHUB: https://github.com/HersyaDev11/Timezy.git
 
 ## ✨ Deskripsi Proyek
 <img width="1919" height="880" alt="image" src="https://github.com/user-attachments/assets/3c9f70b1-320a-4a35-a26a-9f3779fd7cea" />
@@ -72,7 +75,7 @@ Pastikan Anda sudah menginstal alat-alat berikut di komputer Anda:
 ### 2. Kloning Repositori
 Gunakan Terminal atau Command Prompt, lalu klon repositori ini ke dalam direktori lokal Anda:
 ```bash
-git clone <MASUKKAN_URL_GITHUB_ATAU_REPO_KAMU_DISINI>
+git clone "https://github.com/HersyaDev11/Timezy.git"
 ```
 
 Masuk ke dalam folder proyek yang baru saja di-kloning:
