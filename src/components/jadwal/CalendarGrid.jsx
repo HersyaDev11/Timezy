@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { useSchedule } from "../../context/ScheduleContext";
+import DayDetailsModal from "./DayDetailsModal";
 
 export default function CalendarGrid() {
     const { filteredSchedules, currentDate } = useSchedule();
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [isDayModalOpen, setIsDayModalOpen] = useState(false);
 
     // Helper to generate calendar days for the current month
     const generateCalendarDays = (dateData) => {
@@ -84,6 +88,10 @@ export default function CalendarGrid() {
                     return (
                         <div
                             key={day.date}
+                            onClick={() => {
+                                setSelectedDate(day.fullDate);
+                                setIsDayModalOpen(true);
+                            }}
                             className={`group h-24 md:h-32 p-2 border rounded-xl transition-colors cursor-pointer relative flex flex-col overflow-hidden ${day.isToday
                                 ? "border-primary bg-primary/5 dark:bg-primary/10"
                                 : "border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a]/30 hover:border-primary"
@@ -117,6 +125,13 @@ export default function CalendarGrid() {
                     );
                 })}
             </div>
+
+            {/* Day Details Modal */}
+            <DayDetailsModal 
+                isOpen={isDayModalOpen} 
+                onClose={() => setIsDayModalOpen(false)} 
+                date={selectedDate} 
+            />
         </div>
     );
 }

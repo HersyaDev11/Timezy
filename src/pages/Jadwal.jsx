@@ -70,9 +70,9 @@ export default function Jadwal() {
             <FilterActions />
 
             {/* Main Content Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                 {/* Left Side: Calendar / Main View */}
-                <div className="lg:col-span-2 flex flex-col gap-4">
+                <div className="xl:col-span-2 flex flex-col gap-4">
                     <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0f172a] overflow-hidden shadow-sm flex flex-col h-full min-h-[500px]">
                         <CalendarHeader onAddClick={() => setIsModalOpen(true)} />
                         {currentView === 'calendar' && <CalendarGrid />}

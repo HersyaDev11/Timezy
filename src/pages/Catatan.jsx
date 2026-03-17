@@ -13,15 +13,15 @@ export default function Catatan() {
                 <NoteExplorer />
             ) : (
                 /* Editor View */
-                <>
+                <div className="flex flex-col lg:flex-row w-full gap-4 relative">
                     {/* Main Editor Section */}
-                    <div className="flex-1 min-w-0">
+                    <div className="flex-1 min-w-0 flex flex-col h-full">
                         <NoteEditor />
                     </div>
 
                     {/* Right Sidebar Section */}
                     <NoteSidebar />
-                </>
+                </div>
             )}
 
             {/* Floating Action Button (Mobile Only) */}

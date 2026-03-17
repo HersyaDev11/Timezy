@@ -17,6 +17,7 @@ export const NotesProvider = ({ children }) => {
             tags: ["Agile", "Scrum"],
             lastEdited: new Date().toISOString(),
             course: "Manajemen Proyek",
+            history: [],
         },
         {
             id: "2",
@@ -26,6 +27,7 @@ export const NotesProvider = ({ children }) => {
             tags: ["Ide", "Proyek"],
             lastEdited: new Date(Date.now() - 86400000).toISOString(), // 1 day ago
             course: "Umum",
+            history: [],
         },
     ];
 
@@ -42,7 +44,8 @@ export const NotesProvider = ({ children }) => {
         return initialNotes;
     });
 
-    const [activeNoteId, setActiveNoteId] = useState(notes.length > 0 ? notes[0].id : null);
+    // Start with null to always show the Explorer menu on load
+    const [activeNoteId, setActiveNoteId] = useState(null);
 
     // Notification state for toast
     const [notification, setNotification] = useState(null);
@@ -52,12 +55,10 @@ export const NotesProvider = ({ children }) => {
         localStorage.setItem('timezy_notes', JSON.stringify(notes));
     }, [notes]);
 
-    // Keep activeNoteId valid
+    // Keep activeNoteId valid if the currently selected note is deleted
     useEffect(() => {
-        if (!activeNoteId && notes.length > 0) {
-            setActiveNoteId(notes[0].id);
-        } else if (activeNoteId && !notes.find(n => n.id === activeNoteId)) {
-            setActiveNoteId(notes.length > 0 ? notes[0].id : null);
+        if (activeNoteId && !notes.find(n => n.id === activeNoteId)) {
+            setActiveNoteId(null);
         }
     }, [notes, activeNoteId]);
 
@@ -75,6 +76,7 @@ export const NotesProvider = ({ children }) => {
             tags: [],
             lastEdited: new Date().toISOString(),
             course: "",
+            history: [],
         };
         setNotes([newNote, ...notes]);
         setActiveNoteId(newNote.id);
@@ -87,6 +89,51 @@ export const NotesProvider = ({ children }) => {
                 ? { ...note, ...updatedData, lastEdited: new Date().toISOString() }
                 : note
         ));
+    };
+
+    const createNoteSnapshot = (id) => {
+        setNotes(notes.map(note => {
+            if (note.id === id) {
+                const newSnapshot = {
+                    timestamp: new Date().toISOString(),
+                    title: note.title,
+                    content: note.content
+                };
+                // Keep only the last 10 snapshots to avoid bloating local storage
+                const updatedHistory = [newSnapshot, ...(note.history || [])].slice(0, 10);
+                return { ...note, history: updatedHistory, lastEdited: new Date().toISOString() };
+            }
+            return note;
+        }));
+        showNotification("Catatan berhasil disimpan ke Riwayat", "success");
+    };
+
+    const restoreNoteSnapshot = (id, snapshotIndex) => {
+        setNotes(notes.map(note => {
+            if (note.id === id && note.history && note.history[snapshotIndex]) {
+                const snapshot = note.history[snapshotIndex];
+                
+                // Save current state before restoring
+                const currentSnapshot = {
+                    timestamp: new Date().toISOString(),
+                    title: note.title,
+                    content: note.content,
+                    isAutoSave: true // Mark as an auto-save before restore
+                };
+                
+                const updatedHistory = [currentSnapshot, ...note.history].slice(0, 10);
+
+                return {
+                    ...note,
+                    title: snapshot.title,
+                    content: snapshot.content,
+                    history: updatedHistory,
+                    lastEdited: new Date().toISOString()
+                };
+            }
+            return note;
+        }));
+        showNotification("Catatan berhasil dipulihkan", "success");
     };
 
     const deleteNote = (id) => {
@@ -104,7 +151,9 @@ export const NotesProvider = ({ children }) => {
         addNote,
         updateNote,
         deleteNote,
-        notification
+        showNotification,
+        createNoteSnapshot,
+        restoreNoteSnapshot,
     };
 
     return (

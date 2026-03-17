@@ -1,14 +1,32 @@
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useScheduleNotifications } from "../../hooks/useScheduleNotifications";
+import FocusConfigModal from "../dashboard/FocusConfigModal";
 
-export default function Sidebar() {
+export default function Sidebar({ onClose }) {
     const { isSupported, permission, requestPermission } = useScheduleNotifications();
+    const [isFocusModalOpen, setIsFocusModalOpen] = useState(false);
+    const navigate = useNavigate();
 
     return (
-        <aside className="flex w-64 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0f172a] shrink-0 h-full overflow-y-auto">
+        <aside className="flex w-64 lg:w-64 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0f172a] shrink-0 h-full overflow-y-auto">
             <div className="flex flex-col gap-4 p-4 h-full">
+                {/* Mobile Header inside Sidebar */}
+                <div className="flex lg:hidden justify-between items-center mb-2">
+                    <div className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <span className="material-symbols-outlined text-primary">schedule</span>
+                        Timezy
+                    </div>
+                    <button 
+                        onClick={onClose}
+                        className="p-1 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-[#1E293B] transition-colors"
+                    >
+                        <span className="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+
                 {/* User Profile */}
-                <div className="flex gap-3 items-center mb-4">
+                <div className="flex gap-3 items-center mb-2 lg:mb-4">
                     <div
                         className="bg-center bg-no-repeat bg-cover rounded-full h-12 w-12 border-2 border-primary"
                         data-alt="Profile picture of a male student"
@@ -63,9 +81,14 @@ export default function Sidebar() {
                         </span>
                         <span>Jadwal</span>
                     </NavLink>
-                    <a
-                        className="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1E293B] transition-colors"
-                        href="#"
+                    <NavLink
+                        to="/tugas"
+                        className={({ isActive }) =>
+                            `flex items-center gap-3 px-3 py-3 rounded-lg transition-colors ${isActive
+                                ? "bg-primary/10 text-primary dark:bg-[#283039] dark:text-white font-semibold"
+                                : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1E293B] font-medium"
+                            }`
+                        }
                     >
                         <span
                             className="material-symbols-outlined"
@@ -74,10 +97,15 @@ export default function Sidebar() {
                             checklist
                         </span>
                         <span className="text-sm font-medium">Tugas</span>
-                    </a>
-                    <a
-                        className="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1E293B] transition-colors"
-                        href="#"
+                    </NavLink>
+                    <NavLink
+                        to="/fokus"
+                        className={({ isActive }) =>
+                            `flex items-center gap-3 px-3 py-3 rounded-lg transition-colors ${isActive
+                                ? "bg-primary/10 text-primary dark:bg-[#283039] dark:text-white font-semibold"
+                                : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1E293B] font-medium"
+                            }`
+                        }
                     >
                         <span
                             className="material-symbols-outlined"
@@ -86,7 +114,7 @@ export default function Sidebar() {
                             timer
                         </span>
                         <span className="text-sm font-medium">Fokus</span>
-                    </a>
+                    </NavLink>
                     <NavLink
                         to="/catatan"
                         className={({ isActive }) =>
@@ -104,18 +132,6 @@ export default function Sidebar() {
                         </span>
                         <span>Catatan</span>
                     </NavLink>
-                    {/* <a
-                        className="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#1E293B] transition-colors"
-                        href="#"
-                    >
-                        <span
-                            className="material-symbols-outlined"
-                            style={{ fontVariationSettings: "'FILL' 0, 'wght' 400" }}
-                        >
-                            settings
-                        </span>
-                        <span className="text-sm font-medium">Pengaturan</span>
-                    </a> */}
                 </nav>
 
                 {/* Notification Settings */}
@@ -144,7 +160,10 @@ export default function Sidebar() {
                 )}
 
                 {/* Start Focus Button */}
-                <button className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg py-3 px-4 bg-primary hover:bg-blue-600 text-white shadow-lg shadow-primary/30 transition-all mt-4">
+                <button 
+                    onClick={() => setIsFocusModalOpen(true)}
+                    className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg py-3 px-4 bg-primary hover:bg-blue-600 text-white shadow-lg shadow-primary/30 transition-all mt-4"
+                >
                     <span className="material-symbols-outlined text-[20px]">
                         play_arrow
                     </span>
@@ -152,7 +171,7 @@ export default function Sidebar() {
                         Mulai Sesi Fokus
                     </span>
                 </button>
-                <button link="/" className="flex w-full cursor-pointer items-center justify-center rounded-lg py-3 px-4 bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-primary/30 transition-all mt-1">
+                <button onClick={() => navigate("/")} className="flex w-full cursor-pointer items-center justify-center rounded-lg py-3 px-4 bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-primary/30 transition-all mt-1">
                     <span className="material-symbols-outlined text-[20px]">
                         logout
                     </span>
@@ -161,6 +180,11 @@ export default function Sidebar() {
                     </span>
                 </button>
             </div>
+
+            {/* Render Focus Modal if open */}
+            {isFocusModalOpen && (
+                <FocusConfigModal onClose={() => setIsFocusModalOpen(false)} />
+            )}
         </aside>
     );
 }

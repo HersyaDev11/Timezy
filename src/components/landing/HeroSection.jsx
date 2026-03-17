@@ -1,4 +1,5 @@
 import { FiArrowRight } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 export default function HeroSection() {
   return (
@@ -22,12 +23,12 @@ export default function HeroSection() {
           </p>
 
           <div className="flex gap-4">
-            <button className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 transition-all duration-300 px-6 py-3 rounded-xl font-semibold shadow-lg shadow-blue-500/30 hover:scale-105">
+            <Link to="/register" className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 transition-all duration-300 px-6 py-3 rounded-xl font-semibold shadow-lg shadow-blue-500/30 hover:scale-105">
               Mulai Sekarang
               <FiArrowRight className="text-lg" />
-            </button>
+            </Link>
 
-            <button className="px-6 py-3 rounded-xl border border-white/30 hover:bg-white/10 transition">
+            <button className="px-6 py-3 rounded-xl border border-white/30 hover:bg-white/10 transition cursor-pointer">
               Pelajari Lebih
             </button>
           </div>

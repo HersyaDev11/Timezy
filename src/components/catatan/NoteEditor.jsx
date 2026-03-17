@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { useNotes } from "../../context/NotesContext";
+import NoteHistoryModal from "./NoteHistoryModal";
 
 export default function NoteEditor() {
-    const { activeNote, updateNote, deleteNote, setActiveNoteId } = useNotes();
+    const { activeNote, updateNote, deleteNote, setActiveNoteId, createNoteSnapshot } = useNotes();
+    const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
 
     if (!activeNote) {
         return (
@@ -105,31 +108,57 @@ export default function NoteEditor() {
 
                 <div className="flex items-center gap-3 shrink-0">
                     <button
+                        onClick={() => {
+                            createNoteSnapshot(activeNote.id);
+                            setActiveNoteId(null);
+                        }}
+                        className="flex items-center gap-2 px-3 py-1.5 bg-primary hover:bg-blue-600 text-white rounded-lg transition-all text-xs font-bold shadow-sm shadow-primary/20 cursor-pointer"
+                        title="Simpan Versi"
+                    >
+                        <span className="material-symbols-outlined text-[16px]">save</span>
+                        <span className="hidden sm:inline">Simpan</span>
+                    </button>
+                    <button
+                        onClick={() => setIsHistoryModalOpen(true)}
+                        className="flex items-center gap-2 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg transition-all text-xs font-bold cursor-pointer"
+                        title="Riwayat Simpanan"
+                    >
+                        <span className="material-symbols-outlined text-[16px]">history</span>
+                        <span className="hidden sm:inline">Riwayat</span>
+                    </button>
+                    
+                    <div className="w-px h-5 bg-slate-300 dark:bg-slate-700 mx-1"></div>
+
+                    <button
                         onClick={() => deleteNote(activeNote.id)}
-                        className="flex items-center gap-2 px-3 py-1.5 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all text-xs font-bold"
+                        className="flex items-center gap-2 px-3 py-1.5 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all text-xs font-bold cursor-pointer"
                         title="Hapus Catatan"
                     >
                         <span className="material-symbols-outlined text-[16px]">delete</span>
                         <span className="hidden sm:inline">Hapus</span>
                     </button>
-                    <button className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 text-primary hover:bg-primary hover:text-white rounded-lg transition-all text-xs font-bold border border-primary/20">
-                        <span className="material-symbols-outlined text-[16px]">auto_fix_high</span>
-                        <span>Ubah ke Tugas</span>
-                    </button>
                 </div>
             </div>
 
             {/* Editor Area */}
-            <div className="flex-1 overflow-y-auto px-6 lg:px-12 py-8 scroll-smooth">
-                <div className="max-w-4xl mx-auto h-full pb-32 prose prose-slate dark:prose-invert">
+            <div className="flex-1 overflow-y-auto px-6 lg:px-12 py-8 scroll-smooth pb-24">
+                <div className="max-w-4xl mx-auto h-full prose prose-slate dark:prose-invert">
                     <textarea
-                        className="w-full h-full bg-transparent border-none resize-none focus:ring-0 p-0 text-slate-800 dark:text-slate-200 placeholder:text-slate-400"
+                        className="w-full h-full min-h-[500px] bg-transparent border-none resize-none focus:ring-0 p-0 text-slate-800 dark:text-slate-200 placeholder:text-slate-400 outline-none"
                         placeholder="Mulai menulis catatan di sini..."
-                        value={activeNote.content}
+                        value={activeNote.content || ""}
                         onChange={handleContentChange}
                     />
                 </div>
             </div>
+
+            {/* History Modal */}
+            {isHistoryModalOpen && (
+                <NoteHistoryModal 
+                    note={activeNote} 
+                    onClose={() => setIsHistoryModalOpen(false)} 
+                />
+            )}
         </div>
     );
 }
